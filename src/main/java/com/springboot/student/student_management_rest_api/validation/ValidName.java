@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidName {
-    String message () default "Name must contain only letters and spaces";
+    String message () default "Name must contain only letters, periods and spaces";
     Class<?> [] groups() default{};
     Class<? extends Payload>[] payload() default {};
 }

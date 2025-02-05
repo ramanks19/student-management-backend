@@ -19,10 +19,18 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    /**
+     * Add a student
+     * */
+
     @PostMapping
     public ResponseEntity<StudentDTO> createStudent(@Valid @RequestBody StudentDTO studentDTO) {
         return new ResponseEntity<>(studentService.addStudent(studentDTO), HttpStatus.CREATED);
     }
+
+    /**
+     * List all the students
+     * */
 
     @GetMapping
     public ResponseEntity<StudentResponse> getAllStudents(
@@ -34,6 +42,9 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudents(pageNo, pageSize, sortBy, sortDir));
     }
 
+    /**
+     * Search the student by its name
+     * */
     @GetMapping("/search")
     public ResponseEntity<StudentResponse> searchByStudentName(
             @RequestParam(value = "name", required = true) String name,
@@ -45,30 +56,43 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getAllStudentsWithName(name, pageNo, pageSize, sortBy, sortDir));
     }
 
-    @PutMapping("/{name}")
-    public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO studentDTO,
-                                                    @PathVariable(name = "name") String name,
+    /**
+     * Update a student using its name.
+     * */
+
+    @PutMapping("/by-name/{name}")
+    public ResponseEntity<StudentDTO> updateStudent(@Valid @RequestBody StudentDTO studentDTO,
+                                                    @PathVariable String name,
                                                     @RequestParam(required = false)Set<String> fieldsToUpdate) {
         StudentDTO studentResponse = studentService.updateStudentByName(studentDTO, name, fieldsToUpdate);
         return new ResponseEntity<>(studentResponse, HttpStatus.OK);
     }
 
-    @PutMapping("/{studentId}")
-    public ResponseEntity<StudentDTO> updateStudent(@RequestBody StudentDTO studentDTO,
-                                                    @PathVariable(name = "studentId") Long studentId,
+    /**
+     * Update a student using its student id
+     * */
+    @PutMapping("/by-id/{studentId}")
+    public ResponseEntity<StudentDTO> updateStudent(@Valid @RequestBody StudentDTO studentDTO,
+                                                    @PathVariable Long studentId,
                                                     @RequestParam(required = false)Set<String> fieldsToUpdate) {
         StudentDTO studentResponse = studentService.updateStudentById(studentDTO, studentId, fieldsToUpdate);
         return new ResponseEntity<>(studentResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<String> deleteStudentByName(@PathVariable(name = "name") String name) {
+    /**
+     * Delete a student using its name
+     * */
+    @DeleteMapping("/by-name/{name}")
+    public ResponseEntity<String> deleteStudentByName(@PathVariable String name) {
         studentService.deleteByStudentName(name);
         return new ResponseEntity<>("Student with name: " + name + " is deleted successfully!!!", HttpStatus.OK);
     }
 
-    @DeleteMapping("/{studentId}")
-    public ResponseEntity<String> deleteStudentById(@PathVariable(name = "studentId") Long studentId) {
+    /**
+     * Delete a student using its student id
+     * */
+    @DeleteMapping("/by-id/{studentId}")
+    public ResponseEntity<String> deleteStudentById(@PathVariable Long studentId) {
         studentService.deleteByStudentId(studentId);
         return new ResponseEntity<>("Student with id: " + studentId + " is deleted successfully!!!", HttpStatus.OK);
     }

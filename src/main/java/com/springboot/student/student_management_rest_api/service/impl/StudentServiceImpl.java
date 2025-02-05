@@ -86,7 +86,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     /**
-     * Delete a student by using his name
+     * Update a student by using his name
      * */
     @Override
     public StudentDTO updateStudentByName(StudentDTO studentDTO, String name, Set<String> fieldsToUpdate) {
@@ -130,7 +130,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     /**
-     * Delete a student by using his id
+     * Update a student by using his id
      * */
     @Override
     public StudentDTO updateStudentById(StudentDTO studentDTO, Long studentId, Set<String> fieldsToUpdate) {

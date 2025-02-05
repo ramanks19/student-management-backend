@@ -4,7 +4,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class NameValidator implements ConstraintValidator<ValidName, String> {
-    private static final String NAME_PATTERN = "^[A-Za-z ]+$";
+    private static final String NAME_PATTERN = "^[A-Za-z]+(?:[.][A-Za-z]+)*([ ][A-Za-z]+)*$";
 
     @Override
     public void initialize(ValidName constraintAnnotation) {
