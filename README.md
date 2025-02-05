@@ -116,3 +116,7 @@ Here, you can delete a student based on its studentId.
 curl --location --request DELETE 'localhost:8080/api/students/by-id/2'
 ```
 
+
+## Adding the Postman Collection for Reference:
+[Student Management APIs.postman_collection.json](https://github.com/user-attachments/files/18677667/Student.Management.APIs.postman_collection.json)
+The Postman collection contains all the endpoints discussed above along with their example request.
